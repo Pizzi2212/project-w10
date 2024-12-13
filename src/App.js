@@ -1,22 +1,27 @@
+import React from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import MyNav from './components/MyNav'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import MainComponent from './components/MainComponent'
-import LeftBar from './components/LeftBar'
+import Search from './components/Search'
+import Favorites from './components/Favorites'
 
 function App() {
   return (
-    <div>
-      <header>
-        <MyNav />
-      </header>
-      <main>
-        <div style={{ backgroundColor: '#252526' }}>
-          <LeftBar />
-        </div>
-
-        <MainComponent />
-      </main>
-    </div>
+    <Router>
+      <div>
+        <header>
+          <MyNav />
+        </header>
+        <main>
+          <Routes>
+            <Route path="/" element={<MainComponent />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/favorites" element={<Favorites />} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
   )
 }
 

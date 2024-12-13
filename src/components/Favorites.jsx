@@ -1,22 +1,19 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { ListGroup } from 'react-bootstrap'
-import { useLocation } from 'react-router-dom'
-import { FaHeart } from 'react-icons/fa'
-import { useDispatch } from 'react-redux'
-import { addToFavorites } from '../redux/trackSlice'
+import { useSelector, useDispatch } from 'react-redux'
+import { removeFromFavorites } from '../redux/trackSlice'
+import { FaRegTrashAlt } from 'react-icons/fa'
+import { useState } from 'react'
 import { CiPlay1 } from 'react-icons/ci'
 
-const Search = () => {
-  const location = useLocation()
+const Favorites = () => {
   const dispatch = useDispatch()
-  const { query, searchResults } = location.state || {}
+  const favorites = useSelector((state) => state.tracks.favorites)
 
-  const [currentTrack, setCurrentTrack] = useState(null)
-
-  const handleAddToFavorites = (track) => {
-    dispatch(addToFavorites(track))
+  const handleRemoveFromFavorites = (track) => {
+    dispatch(removeFromFavorites(track))
   }
-
+  const [currentTrack, setCurrentTrack] = useState(null)
   const handlePlayAudio = (track) => {
     setCurrentTrack(track)
   }
@@ -30,10 +27,10 @@ const Search = () => {
         minHeight: '100vh',
       }}
     >
-      <h4>Risultati per: "{query}"</h4>
-      {searchResults && searchResults.length > 0 ? (
+      <h4>I tuoi preferiti</h4>
+      {favorites.length > 0 ? (
         <ListGroup>
-          {searchResults.map((track) => (
+          {favorites.map((track) => (
             <ListGroup.Item
               key={track.id}
               style={{
@@ -48,10 +45,9 @@ const Search = () => {
                 style={{ width: '50px', height: '50px' }}
               />{' '}
               <strong>{track.title}</strong> - {track.artist.name}
-              <FaHeart
-                className="ms-3"
-                onClick={() => handleAddToFavorites(track)}
-                style={{ cursor: 'pointer', color: 'red' }}
+              <FaRegTrashAlt
+                onClick={() => handleRemoveFromFavorites(track)}
+                style={{ marginLeft: '10px', cursor: 'pointer' }}
               />
               <CiPlay1
                 onClick={() => handlePlayAudio(track)}
@@ -61,9 +57,8 @@ const Search = () => {
           ))}
         </ListGroup>
       ) : (
-        <p>Non sono stati trovati risultati per la ricerca.</p>
+        <p>Non hai ancora aggiunto brani ai preferiti.</p>
       )}
-
       {currentTrack && (
         <div
           className="fixed-bottom bg-danger p-4 d-flex justify-content-center align-items-center"
@@ -78,4 +73,4 @@ const Search = () => {
   )
 }
 
-export default Search
+export default Favorites

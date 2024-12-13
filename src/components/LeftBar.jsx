@@ -6,7 +6,7 @@ import apple from '../logos/music.svg'
 const LeftBar = () => {
   return (
     <div>
-      <div className="ms-4">
+      <div className="ms-4 pt-4 pb-3">
         <div className="d-flex align-items-center">
           <img src={apple} alt="" />
         </div>
