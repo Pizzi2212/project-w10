@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import MainComponent from './components/MainComponent'
 import Search from './components/Search'
 import Favorites from './components/Favorites'
+import MyFooter from './components/MyFooter'
 
 function App() {
   return (

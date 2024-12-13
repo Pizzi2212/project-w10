@@ -5,6 +5,7 @@ import Songs from './Songs'
 import Player from './Player'
 import LeftBar from './LeftBar'
 import { useLocation } from 'react-router-dom'
+import MyFooter from './MyFooter'
 
 const MainComponent = () => {
   const [tracks, setTracks] = useState([])
@@ -74,6 +75,9 @@ const MainComponent = () => {
       </Carousel>
       <Songs />
       <Player />
+      <div className="pt-1" style={{ backgroundColor: '#323232' }}>
+        <MyFooter />
+      </div>
     </div>
   )
 }
